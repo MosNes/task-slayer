@@ -1,18 +1,46 @@
+/* Color Theme Swatches in Hex
+.Eerie-scene-with-a-doll.-1-hex { color: #590209; }
+.Eerie-scene-with-a-doll.-2-hex { color: #D9042B; }
+.Eerie-scene-with-a-doll.-3-hex { color: #18261B; }
+.Eerie-scene-with-a-doll.-4-hex { color: #8C6C5A; }
+.Eerie-scene-with-a-doll.-5-hex { color: #D9A0A0; }
+
+/* Color Theme Swatches in RGBA
+.Eerie-scene-with-a-doll.-1-rgba { color: rgba(89, 1, 9, 1); }
+.Eerie-scene-with-a-doll.-2-rgba { color: rgba(216, 4, 43, 1); }
+.Eerie-scene-with-a-doll.-3-rgba { color: rgba(24, 38, 26, 1); }
+.Eerie-scene-with-a-doll.-4-rgba { color: rgba(140, 108, 89, 1); }
+.Eerie-scene-with-a-doll.-5-rgba { color: rgba(216, 160, 160, 1); } */
+
+/* Color Theme Swatches in HSLA
+.Eerie-scene-with-a-doll.-1-hsla { color: hsla(354, 96, 17, 1); }
+.Eerie-scene-with-a-doll.-2-hsla { color: hsla(348, 96, 43, 1); }
+.Eerie-scene-with-a-doll.-3-hsla { color: hsla(129, 21, 12, 1); }
+.Eerie-scene-with-a-doll.-4-hsla { color: hsla(22, 21, 45, 1); }
+.Eerie-scene-with-a-doll.-5-hsla { color: hsla(0, 42, 73, 1); } */
+
+
 * {
   box-sizing: border-box;
 }
 
 :root {
-  --primary: #44e9ff;
-  --secondary: #497980;
-  --tertiary: rgb(192, 246, 253);
-  --grey: #333;
+  /* --primary: #44e9ff; */
+  --primary: rgb(214, 178, 159);
+  /* --secondary: #497980; */
+  --secondary: rgb(33, 37, 34);
+  /* --tertiary: rgb(192, 246, 253); */
+  --tertiary: rgb(192, 125, 125);
+  --task-border: rgb(87, 31, 36);
+  --slayer-red: rgba(216, 4, 43, 1);
+  --background-color: rgba(19, 22, 19, 1);
+  --list-column-background: rgb(34, 39, 34);
   font-size: 62.5%;
 }
 
 body {
-  background: #ededed;
-  color: var(--grey);
+  background: var(--background-color);
+  color: var(--task-border);
   margin: 0;
   padding: 0;
   display: flex;
@@ -50,7 +78,7 @@ form input {
   padding: 12px;
   width: 100%;
   font-size: 2.2rem;
-  border: 2px solid var(--grey);
+  border: 2px solid var(--task-border);
   border-radius: 12px;
 }
 
@@ -90,7 +118,7 @@ footer {
 }
 
 .list-title {
-  color: var(--secondary);
+  color: var(--tertiary);
   font-size: 2.6rem;
 }
 
@@ -98,15 +126,15 @@ footer {
   list-style: none;
   padding: 15px;
   height: calc(100% - 50px);
-  background: rgb(196, 196, 196);
+  background: var(--list-column-background);
   border-radius: 12px;
-  border: 2px solid var(--grey);
+  border: 2px solid var(--task-border);
 }
 
 .task-item {
-  color: var(--grey);
+  color: var(--task-border);
   padding: 15px 15px;
-  border: 2px solid var(--grey);
+  border: 2px solid var(--task-border);
   background: var(--tertiary);
   border-radius: 12px;
   margin-bottom: 20px;
@@ -144,15 +172,16 @@ footer {
   border-radius: 12px;
   position: relative;
   top: -3px;
-  box-shadow: 0 3px var(--grey);
+  box-shadow: 0 3px var(--task-border);
+  color: var(--task-border);
 }
 
 .btn:hover {
-  box-shadow: 0 2px var(--grey);
+  box-shadow: 0 2px var(--task-border);
   top: -2px;
 }
 .btn:active {
-  box-shadow: 0 0px var(--grey);
+  box-shadow: 0 0px var(--task-border);
   top: 0;
 }
 
@@ -174,7 +203,7 @@ footer {
   width: 100%;
   max-width: 100%;
   margin: 0;
-  border: 2px solid var(--grey);
+  border: 2px solid var(--task-border);
   border-radius: 12px;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -214,6 +243,10 @@ footer {
 .select-status option {
   font-weight: normal;
   font-size: 2rem;
+}
+
+.slayer-red {
+  color: var(--slayer-red)
 }
 
 @media screen and (max-width: 980px) {
