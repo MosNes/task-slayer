@@ -12,11 +12,16 @@
         <h1 class="page-title">Task<span class="slayer-red">Slayer</span></h1>
         <p>Click the button to add a new task!</p>
         <form id="task-form">
+            <!-- wrap each form element in a div to make the elements easier to position using CSS -->
+            <!-- each form element has a name attribute that is used to reference the input -->
             <div class="form-group">
                 <input type="text" name="task-name" placeholder="Enter Task Name"/>
             </div>
             <div class="form-group">
+                <!-- select elements create dropdown menus -->
                 <select name="task-type" class="select-dropdown">
+                    <!-- top option uses disabled attribute so that user can't choose it
+                    top option uses selected attribute so that it's the default option before a user chooses one -->
                     <option value="" disabled selected>Pick a task type</option>
                     <option value="Follow-Up">Follow-Up</option>
                     <option value="Helpdesk">Helpdesk</option>
@@ -27,7 +32,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <button class="btn" id="save-task">Add Task</button>
+                <!-- the button that submits the form must have type="submit" -->
+                <button class="btn" id="save-task" type="submit">Add Task</button>
             </div>
         </form>
         
