@@ -17,6 +17,8 @@ var taskFormHandler = function(event) {
         return false;
     }
 
+    formEl.reset();
+
     //package data as object
     var taskDataObj = {
         name: taskNameInput,
