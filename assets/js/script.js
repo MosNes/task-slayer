@@ -1,3 +1,6 @@
+//counter for generating unique task IDs
+var taskIdCounter = 0;
+
 //create variables to store HTML objects that you will be frequently editing
 //faster than using querySelector each time
 //use "El" at the end of the variable name to indicate it represents an HTML Element
@@ -39,6 +42,9 @@ var createTaskEl = function(taskDataObj) {
     var listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
 
+    //add task id as a custom attribute
+    listItemEl.setAttribute("data-task-id",taskIdCounter);
+
     //create div to hold task info and list item
     var taskInfoEl = document.createElement("div");
     taskInfoEl.className = "task-info";
@@ -48,8 +54,60 @@ var createTaskEl = function(taskDataObj) {
     //add the taskInfo div into the list item
     listItemEl.appendChild(taskInfoEl);
 
+    //create tasks using the current task-id
+    var taskActionsEl = createTaskActions(taskIdCounter);
+    listItemEl.appendChild(taskActionsEl);
+
     //add entire list item to list
     tasksToDoEl.appendChild(listItemEl);
+
+    //increment task counter by one for the next unique id
+    taskIdCounter++;
+};
+
+//function to create form buttons unique to each individual task, referencing their task-id
+var createTaskActions = function(taskId) {
+    var actionContainerEl = document.createElement("div");
+    actionContainerEl.className = "task-actions";
+
+    //create edit button
+    var editButtonEl = document.createElement("button");
+    editButtonEl.textContent = "Edit";
+    editButtonEl.className = "btn edit-btn";
+    editButtonEl.setAttribute("data-task-id", taskId);
+
+    actionContainerEl.appendChild(editButtonEl);
+
+    //create delete button
+    var deleteButtonEl = document.createElement("button");
+    deleteButtonEl.textContent = "Delete";
+    deleteButtonEl.className = "btn delete-btn";
+    deleteButtonEl.setAttribute("data-task-id", taskId);
+
+    actionContainerEl.appendChild(deleteButtonEl);
+
+    //create dropdown menu
+    var statusSelectEl = document.createElement("select");
+    statusSelectEl.className = "select-status";
+    statusSelectEl.setAttribute("name","status-change");
+    statusSelectEl.setAttribute("data-task-id",taskId);
+
+    //array that holds dropdown choices
+    var statusChoices = ["Task to Slay","In Progress","Slain!"];
+
+    //for loop creates an option element for each item in the statusChoices array
+    for (var i = 0; i<statusChoices.length; i++){
+        var statusOptionEl = document.createElement("option");
+        statusOptionEl.textContent = statusChoices[i];
+        statusOptionEl.setAttribute("value",statusChoices[i]);
+
+        //append to select element
+        statusSelectEl.appendChild(statusOptionEl);
+    }
+
+    actionContainerEl.appendChild(statusSelectEl);
+
+    return actionContainerEl;
 };
 
 //Pass in a callback function, like an Event Handler, as the 2nd argument
