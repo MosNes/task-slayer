@@ -9,13 +9,27 @@ var tasksToDoEl = document.querySelector("#tasks-to-do");
 var createTaskHandler = function(event) {
     //prevents the default behavior of the browser, such as refreshing on form submit
     event.preventDefault();
-    console.log(event);
+    var taskNameInput = document.querySelector("input[name='task-name']").value;
+    var taskTypeInput = document.querySelector("select[name='task-type']").value;
+    
+    
     //When you create an element, be sure to update its className so it can be
     //styled correctly by CSS
+
+    //create list item
     var listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
-    listItemEl.textContent = "SLAY ME!";
+
+    //create div to hold task info and list item
+    var taskInfoEl = document.createElement("div");
+    taskInfoEl.className = "task-info";
+    taskInfoEl.innerHTML = "<h3 class='task-name'>"+taskNameInput+"</h3><span class='task-type'>"+taskTypeInput+"</span>";
+
     //appendChild adds the Element as a child inside the specified parent element
+    //add taskInfoEl div into the listItemEl li:
+    listItemEl.appendChild(taskInfoEl);
+
+    //add listItemEl li into the tasksToDoEl ul:
     tasksToDoEl.appendChild(listItemEl);
 };
 
