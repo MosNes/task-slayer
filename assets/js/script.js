@@ -5,6 +5,7 @@ var taskIdCounter = 0;
 //faster than using querySelector each time
 //use "El" at the end of the variable name to indicate it represents an HTML Element
 //use '#element-id' to access the HTML element by id
+var pageContentEl = document.querySelector("#page-content");
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
 
@@ -114,4 +115,8 @@ var createTaskActions = function(taskId) {
 //for addEventListener to make the event "do" something
 formEl.addEventListener("submit",taskFormHandler);
 
+var taskButtonHandler = function(event) {
+    console.log(event.target);
+};
 
+pageContentEl.addEventListener("click",taskButtonHandler);
