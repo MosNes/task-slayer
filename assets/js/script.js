@@ -7,7 +7,10 @@ var taskIdCounter = 0;
 //use '#element-id' to access the HTML element by id
 var pageContentEl = document.querySelector("#page-content");
 var formEl = document.querySelector("#task-form");
+//save the three columns to variables
 var tasksToDoEl = document.querySelector("#tasks-to-do");
+var tasksInProgressEl = document.querySelector("#tasks-in-progress");
+var tasksCompletedEl = document.querySelector("#tasks-completed");
 
 //Event Handlers are functions that respond to an event, like a button click
 var taskFormHandler = function(event) {
@@ -164,6 +167,7 @@ var editTask = function(taskId) {
 
 };
 
+//handles button clicks
 var taskButtonHandler = function(event) {
     //get target from event
     var targetEl = event.target;
@@ -180,4 +184,31 @@ var taskButtonHandler = function(event) {
     }
 };
 
+//handles edits to the status form field of tasks
+var taskStatusChangeHandler = function(event){
+    //get task item's id
+    var taskId = event.target.getAttribute("data-task-id");
+
+    //get the currently selected option's value and conver to lowercase
+    var statusValue = event.target.value.toLowerCase();
+
+    //find the parent task item element based on the id
+    var taskSelected = document.querySelector(".task-item[data-task-id='"+taskId+"']");
+
+    if (statusValue === "in progress") {
+        tasksInProgressEl.appendChild(taskSelected);
+    }
+    else if (statusValue === "slain!") {
+        tasksCompletedEl.appendChild(taskSelected);
+    }
+    else if (statusValue === "task to slay") {
+        tasksToDoEl.appendChild(taskSelected);
+    }
+
+};
+
+//listens for clicks inside of the <main> element
 pageContentEl.addEventListener("click",taskButtonHandler);
+
+//listens for form field changes inside of the <main> element
+pageContentEl.addEventListener("change",taskStatusChangeHandler);
