@@ -115,8 +115,19 @@ var createTaskActions = function(taskId) {
 //for addEventListener to make the event "do" something
 formEl.addEventListener("submit",taskFormHandler);
 
+var deleteTask = function(taskId) {
+    var taskSelected = document.querySelector(".task-item[data-task-id='"+taskId+"']");
+    taskSelected.remove();
+};
+
 var taskButtonHandler = function(event) {
-    console.log(event.target);
+
+    //filter for the type of event to capture
+    if (event.target.matches(".delete-btn")) {
+        //get the element's task id
+        var taskId = event.target.getAttribute("data-task-id");
+        deleteTask(taskId);
+    }
 };
 
 pageContentEl.addEventListener("click",taskButtonHandler);
