@@ -1,6 +1,9 @@
 //counter for generating unique task IDs
 var taskIdCounter = 0;
 
+var tasks = [];
+
+
 //create variables to store HTML objects that you will be frequently editing
 //faster than using querySelector each time
 //use "El" at the end of the variable name to indicate it represents an HTML Element
@@ -39,7 +42,8 @@ var taskFormHandler = function(event) {
         //package data as object
         var taskDataObj = {
             name: taskNameInput,
-            type: taskTypeInput
+            type: taskTypeInput,
+            status: "Task to Slay"
         };
 
 
@@ -76,6 +80,11 @@ var createTaskEl = function(taskDataObj) {
 
     //add entire list item to list
     tasksToDoEl.appendChild(listItemEl);
+
+    //add task Id to the task object
+    taskDataObj.id = taskIdCounter;
+    //add the task object to the tasks array
+    tasks.push(taskDataObj);
 
     //increment task counter by one for the next unique id
     taskIdCounter++;
@@ -133,6 +142,18 @@ formEl.addEventListener("submit",taskFormHandler);
 var deleteTask = function(taskId) {
     var taskSelected = document.querySelector(".task-item[data-task-id='"+taskId+"']");
     taskSelected.remove();
+
+    var updatedTaskArr = [];
+
+    for (var i = 0; i < tasks.length; i++) {
+        //if task[i].id does not match value of taskId, keep that task and push to new array
+        if (task[i].id !== parseInt(taskId)) {
+            updatedTaskArr.push(tasks[i]);
+        }
+    }
+
+    tasks = updatedTaskArr;
+
 };
 
 //second part of the edit task function
@@ -143,6 +164,16 @@ var completedEditTask = function(taskName, taskType, taskId) {
     //set new values
     taskSelected.querySelector("h3.task-name").textContent = taskName;
     taskSelected.querySelector("span.task-type").textContent = taskType;
+
+    //also update values of tasks saved to the task array
+    for (var i = 0; i < tasks.length; i++){
+        if (tasks[i].id === parseInt(taskId)){
+            tasks[i].name = taskName;
+            tasks[i].type = taskType;
+        }
+    };
+
+    console.log(tasks);
 
     alert("Task Updated!");
     
@@ -204,6 +235,14 @@ var taskStatusChangeHandler = function(event){
     else if (statusValue === "task to slay") {
         tasksToDoEl.appendChild(taskSelected);
     }
+
+    //update task status in tasks array
+    for (var i = 0; i < tasks.length; i++) {
+        if (tasks[i].id === parseInt(taskId)){
+            tasks[i].status = statusValue;
+        }
+    };
+    console.log(tasks);
 
 };
 
