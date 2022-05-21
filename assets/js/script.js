@@ -23,14 +23,26 @@ var taskFormHandler = function(event) {
 
     formEl.reset();
 
-    //package data as object
-    var taskDataObj = {
-        name: taskNameInput,
-        type: taskTypeInput
-    };
+    //check for presence of edit id
+    var isEdit = formEl.hasAttribute("data-task-id");
+    
+    //if the data-task-id attribut exists
+    if (isEdit) {
+        // get task Id and run the edit function
+        var taskId = formEl.getAttribute("data-task-id");
+        completedEditTask(taskNameInput, taskTypeInput, taskId);
+    }
+    else {
+        //package data as object
+        var taskDataObj = {
+            name: taskNameInput,
+            type: taskTypeInput
+        };
 
-    //passes the object to the createTaskEl function
-    createTaskEl(taskDataObj);
+
+        //passes the object to the createTaskEl function
+        createTaskEl(taskDataObj);
+    }
     
 };
 
@@ -120,6 +132,23 @@ var deleteTask = function(taskId) {
     taskSelected.remove();
 };
 
+//second part of the edit task function
+var completedEditTask = function(taskName, taskType, taskId) {
+    //find the matching task list item
+    var taskSelected = document.querySelector(".task-item[data-task-id='"+taskId+"']");
+
+    //set new values
+    taskSelected.querySelector("h3.task-name").textContent = taskName;
+    taskSelected.querySelector("span.task-type").textContent = taskType;
+
+    alert("Task Updated!");
+    
+    //reset form by removing the data-task-id attribute
+    formEl.removeAttribute("data-task-id");
+    document.querySelector("#save-task").textContent = "Add Task";
+};
+
+//first part of the edit task function
 var editTask = function(taskId) {
     console.log("editing task #"+taskId);
 
